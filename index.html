@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Ledger</title>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+    <h1>Pocket Ledger</h1>
+    <nav aria-label="Sections"><a href="#dash">Dashboard</a><a href="#add">Add</a><a href="#set">Settings</a><a href="#recs">Records</a><a href="#about">About</a></nav>
+</header>
+<main id="main">
+    <p id="status" class="wide" role="status"></p>
+    <section id="dash" class="wide" aria-labelledby="h-dash">
+        <h2 id="h-dash">Dashboard</h2>
+        <div class="stats">
+            <div><b id="sCount">0</b>records</div>
+            <div><b id="sSum">0</b>spent in total</div>
+            <div><b id="sTop">none yet</b>top category</div>
+            <div><label for="view" style="margin:0">Show amounts in</label><select id="view"></select></div>
+            
+        </div>
+    <p id="capMsg" role="status" aria-live="polite"></p>
+    <p style="margin:0">Spending over the last 7 days</p>
+    <div class="bars" id="bars" role="img" aria-label="Spending over the last 7 days"></div>
+    </section>
+
+    <section id="add" aria-labelledby="h-add">
+        <h2 id="h-add">Add an expense</h2>
+        <form id="form" novalidate>
+            <label for="desc">Description</label>
+            <input id="desc" autocomplete="off" aria-describedby="e-desc"><p class="err" id="e-desc"></p>
+            <div class ="row">
+                <div><label for="amt">Amount (base currency)</label><input id="amt" inputmode="decimal" aria-describedby="e-amt"><p class="err" id="e-amt"></p></div>
+                <div><label for="date">Date (YYYY-MM-DD)</label><input id="date" aria-describedby="e-date"><p class="err" id="e-date"></p></p></div>
+            </div>
+            <label for="cat">Category</label>
+            <input id="cat" list="catlist" autocomplete="off" aria-describedby="e-cat"><datalist id="catlist"></datalist><p class="err" id="e-cat"></p>
+            <button>Add expense</button>
+        </form>
+    </section>
+    <section id="set" aria-labelledby="h-set">
+        <h2 id="h-set">Settings</h2>
+        <form id="setForm" novalidate>
+            <div class="row">
+                <div><label for="base">Base Currency</label><input id="base" maxlength="3"></div>
+                <div><label for="cap">Monthly Cap (base)</label><input id="cap" inputmode="decimal"></div>
+            </div>
+            <div class="row">
+                <div><label for="c2">Second currency</label><input id="c2" maxlength="3"></div>
+                <div><label for="r2">1 base equals</label><input id="r2" inputmode="decimal"></div>
+            </div>
+            <div class="row">
+                <div><label for="c3">Third currency</label><input id="c3" maxlength="3"></div>
+                <div><label for="r3">1 base equals</label><input id="r3" inputmode="decimal"></div>
+            </div>
+            <label for="cats">Categories, separated by commas</label><input id="cats">
+            <p class="err" id="e-set" role="alert"></p>
+            <button>Save settings</button>
+        </form>
+        <p><button id="export" class="alt">Export JSON</button></p>
+        <label for="import">Import JSON</label><input id="import" type="file" accept=".json,application/json">
+    </section>
+    <section id="recs" class="wide" aria-labelledby="h-recs">
+        <h2 id="h-recs">Records</h2>
+        <div class="row">
+            <div><label for="q">Search with a regex</label><input id="q" placeholder="try (coffee|tea) or \.\d{2}\b" autocomplete="off" aria-describedby="e-q"></div>
+            <div><label for="sort">Sort by</label>
+                <select id="sort">
+                    <option value="date-d">Date, newest first</option><option value="date-a">Date, oldest first</option>
+                     <option value="desc-a">Description A to Z</option><option value="date-z">Description Z to A</option>
+                      <option value="amt-d">Amount, high to low</option><option value="amt-a">Amount, low to high</option>
+                </select></div>
+        </div>
+        <label><input type="checkbox" id="ci" checked>Ignore case</label>
+        <p class="err" id="e-q"></p>
+        <div class="tablewrap">
+            <table>
+                <caption class="sr">Expenses</caption>
+                <thead><tr><th scope="col">Date</th><th scope="col">Description</th><th scope="col">Category</th><th scope="col">Amount</th><th scope="col">Actions</th></tr></thead>
+                <tbody id="rows"></tbody>
+            </table>
+        </div>
+        <p id="empty"></p>
+    </section>
+   <section id="about" class="wide" aria-labelledby="h-about">
+    <h2 id="h-about">About</h2>
+    <p>Pocket Ledger helps a student see where the money goes. Add expenses, search them with regex, and keep an eye on a monthly cap. Everything is saved in this browser. </p>
+    <p>Built by RUHIGIRA IRIZA GIANNE ELYSE. <a href="https://github.com/eruhigira-tech">GitHub</a> or <a href="mailto:e.ruhigira@alustudent.com">Email</a>.</p>
+   </section> 
+</main>
+ <footer><p>Data never leaves your browser.</p></footer>
+</body>
+</html>
