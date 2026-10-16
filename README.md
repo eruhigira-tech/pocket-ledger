@@ -48,7 +48,7 @@ Search examples: `coffee|tea`, `\.\d{2}\b`, `^2025-1`.
 | Esc | Close the delete confirmation |
 
 ## Accessibility
-Semantic landmarks, visible labels, errors linked with aria-describedby and aria-invalid, live regions, chart text alternative, visible focus ring, reduced-motion support. See `docs/spec.md` and `docs/a11y-audit.md`.
+Semantic landmarks, visible labels, errors linked with aria-describedby and aria-invalid, live regions, chart text alternative, visible focus ring, reduced-motion support. See `docs/spec.md`.
 
 ## Project layout
     index.html        page
@@ -56,7 +56,7 @@ Semantic landmarks, visible labels, errors linked with aria-describedby and aria
     styles/main.css   styles
     scripts/          validators.js, search.js, app.js
     seed/seed.json    sample data
-    docs/             spec, audit, demo script
+    docs/             spec
 
 ## Author
-YOUR NAME, [GitHub](https://github.com/eruhigira-tech), e.ruhigira@alustudent.com
+RUHIGIRA IRIZA Gianne Elyse, [GitHub](https://github.com/eruhigira-tech), e.ruhigira@alustudent.com
