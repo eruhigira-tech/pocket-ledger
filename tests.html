@@ -20,6 +20,7 @@ li{padding:.15rem 0}
 <p><a href="index.html">Back to the app</a></p>
 
 <script src="scripts/validators.js"></script>
+<script src="scripts/search.js"></script>
 <script>
 (() => {
   const { RX, checkFields, isRealDate } = window.Ledger;
@@ -73,6 +74,31 @@ li{padding:.15rem 0}
   test('checkFields: reports all 4 errors at once', () => Object.keys(checkFields({ description: '', amount: 'x', date: 'y', category: '1' })).length === 4);
 
   const s = document.getElementById('summary');
+   {
+    const { compile, hl, esc, sorters } = window.Ledger;
+    test('compile: empty string gives null', () => compile('', true) === null);
+    test('compile: invalid pattern gives null, no throw', () => compile('(', true) === null);
+    test('compile: ignore-case flag works', () => compile('coffee', true).test('COFFEE'));
+    test('compile: case-sensitive flag works', () => !compile('coffee', false).test('COFFEE'));
+    test('esc: escapes HTML characters', () => esc('<b>"&\'') === '&#60;b&#62;&#34;&#38;&#39;');
+    test('hl: wraps matches in <mark>', () => hl('Coffee shop', compile('coffee', true)) === '<mark>Coffee</mark> shop');
+    test('hl: escapes text before highlighting', () => hl('<A4> paper', compile('paper', true)) === '&#60;A4&#62; <mark>paper</mark>');
+    test('hl: zero-width matches do not break output', () => hl('abc', compile('x*', true)) === 'abc');
+    test('hl: no regex returns escaped text', () => hl('<i>', null) === '&#60;i&#62;');
+
+    const data = [
+      { date: '2025-01-02', description: 'b', amount: 5 },
+      { date: '2025-03-01', description: 'a', amount: 50 },
+      { date: '2025-02-01', description: 'c', amount: 1 }
+    ];
+    const order = key => data.slice().sort(sorters[key]).map(r => r.description).join('');
+    test('sort: date newest first', () => order('date-d') === 'acb');
+    test('sort: date oldest first', () => order('date-a') === 'bca');
+    test('sort: description A to Z', () => order('desc-a') === 'abc');
+    test('sort: description Z to A', () => order('desc-z') === 'cba');
+    test('sort: amount high to low', () => order('amt-d') === 'abc');
+    test('sort: amount low to high', () => order('amt-a') === 'cba');
+  }
   s.textContent = pass + ' passed, ' + fail + ' failed';
   s.style.color = fail ? '#b3261e' : '#1d6b3a';
   document.title = (fail ? 'FAIL ' : 'PASS ') + document.title;
