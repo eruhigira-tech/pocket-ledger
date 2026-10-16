@@ -1,0 +1,14 @@
+[
+{"id":"rec_0001","description":"Lunch at cafeteria","amount":12.5,"category":"Food","date":"2025-09-25","createdAt":"2025-09-25T12:30:00.000Z","updatedAt":"2025-09-25T12:30:00.000Z"},
+{"id":"rec_0002","description":"Chemistry textbook","amount":89.99,"category":"Books","date":"2025-09-23","createdAt":"2025-09-23T09:10:00.000Z","updatedAt":"2025-09-23T09:10:00.000Z"},
+{"id":"rec_0003","description":"Bus pass","amount":45,"category":"Transport","date":"2025-09-20","createdAt":"2025-09-20T07:45:00.000Z","updatedAt":"2025-09-20T07:45:00.000Z"},
+{"id":"rec_0004","description":"Coffee with friends","amount":8.75,"category":"Entertainment","date":"2025-09-28","createdAt":"2025-09-28T16:00:00.000Z","updatedAt":"2025-09-28T16:00:00.000Z"},
+{"id":"rec_0005","description":"A","amount":0,"category":"Other","date":"2024-02-29","createdAt":"2024-02-29T00:00:00.000Z","updatedAt":"2024-02-29T00:00:00.000Z"},
+{"id":"rec_0006","description":"Loose change found in the jacket pocket","amount":0.05,"category":"Other","date":"2025-01-01","createdAt":"2025-01-01T08:00:00.000Z","updatedAt":"2025-01-01T08:00:00.000Z"},
+{"id":"rec_0007","description":"Semester tuition instalment","amount":99999.99,"category":"Fees","date":"2025-12-31","createdAt":"2025-12-31T23:59:00.000Z","updatedAt":"2025-12-31T23:59:00.000Z"},
+{"id":"rec_0008","description":"Printer ink & paper <A4> 'bulk'","amount":23.1,"category":"Books","date":"2025-10-03","createdAt":"2025-10-03T10:20:00.000Z","updatedAt":"2025-10-03T10:20:00.000Z"},
+{"id":"rec_0009","description":"Café au lait at 08:15","amount":3.2,"category":"Food","date":"2025-10-04","createdAt":"2025-10-04T08:15:00.000Z","updatedAt":"2025-10-04T08:15:00.000Z"},
+{"id":"rec_0010","description":"Taxi back from Kigali Heights","amount":7,"category":"Transport","date":"2026-01-15","createdAt":"2026-01-15T21:40:00.000Z","updatedAt":"2026-01-15T21:40:00.000Z"},
+{"id":"rec_0011","description":"Movie night with tea and popcorn","amount":15.5,"category":"Entertainment","date":"2025-11-08","createdAt":"2025-11-08T19:00:00.000Z","updatedAt":"2025-11-08T19:00:00.000Z"},
+{"id":"rec_0012","description":"Late fee for library book","amount":1.25,"category":"Fees","date":"2025-11-20","createdAt":"2025-11-20T14:05:00.000Z","updatedAt":"2025-11-20T14:05:00.000Z"}
+]
