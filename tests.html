@@ -23,10 +23,10 @@ li{padding:.15rem 0}
 <script src="scripts/search.js"></script>
 <script>
 (() => {
-  const { RX, checkFields, isRealDate } = window.Ledger;
-  let pass = 0, fail = 0;
-  const out = document.getElementById('out');
-  function test(name, fn) {
+ const { RX, checkFields, isRealDate } = window.Ledger;
+ let pass = 0, fail = 0;
+ const out = document.getElementById('out');
+ function test(name, fn){
     let ok = false, note = '';
     try { ok = fn() === true; } catch (err) { note = ' (threw: ' + err.message + ')'; }
     ok ? pass++ : fail++;
@@ -34,7 +34,7 @@ li{padding:.15rem 0}
     li.className = ok ? 'pass' : 'fail';
     li.textContent = name + note;
     out.appendChild(li);
-  }
+ }
   const good = { description: 'Lunch at cafeteria', amount: '12.50', date: '2025-09-25', category: 'Food' };
   const bad = (patch, key) => key in checkFields({ ...good, ...patch });
 
