@@ -124,6 +124,13 @@ mark{background:#ffe08a;color:inherit}
   }
   td::before{content:none}
 }
+:focus-visible{outline:3px solid #e08a00;outline-offset:2px}
+button{transition:background .15s}
+.bars div{animation:grow .5s ease-out}
+tr.new{animation:flash 1.5s}
+@keyframes grow{from{transform:scaleY(0)}}
+@keyframes flash{from{background:#cfe8d5}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(min-width:1024px){
   main{
       display:grid;
