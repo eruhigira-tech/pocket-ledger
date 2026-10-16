@@ -53,8 +53,42 @@
     $('rows').innerHTML = list.map(r => r.id === editing ? editRow(r) : row(r, re)).join('');
     $('empty').textContent = list.length ? '' : S.records.length ? 'No records match this pattern.' : 'No expenses yet. Add one above.';
     fresh = null;
+    stats();
+  }
+const sum = list => list.reduce((a, r) => a + r.amount, 0);
+
+  function stats() {
+    const rs = S.records, byCat = {};
+    rs.forEach(r => byCat[r.category] = (byCat[r.category] || 0) + r.amount);
+    const top = Object.entries(byCat).sort((a, b) => b[1] - a[1])[0];
+    $('sCount').textContent = rs.length;
+    $('sSum').textContent = money(sum(rs));
+    $('sTop').textContent = top ? top[0] : 'none yet';
+
+  
+    const month = daysAgo(0).slice(0, 7);
+    const left = +S.settings.cap - sum(rs.filter(r => r.date.startsWith(month))), over = left < 0;
+    const msg = over ? `Over the monthly cap by ${money(-left)}.` : `${money(left)} left under this month's cap.`;
+    const cap = $('capMsg');
+    cap.setAttribute('role', over ? 'alert' : 'status');
+    cap.setAttribute('aria-live', over ? 'assertive' : 'polite');   
+    cap.className = over ? 'bad' : 'ok';
+    if (cap.textContent !== msg) cap.textContent = msg;           
+
+    
+    const days = [...Array(7)].map((_, i) => daysAgo(6 - i));
+    const vals = days.map(d => sum(rs.filter(r => r.date === d))), max = Math.max(...vals, 1);
+    $('bars').innerHTML = vals.map((v, i) => `<div style="height:${v / max * 100}%" title="${money(v)}"><span>` +
+      new Date(days[i] + 'T00:00').toLocaleDateString('en', { weekday: 'short' }) + '</span></div>').join('');
+    $('bars').setAttribute('aria-label', 'Spending, last 7 days: ' + vals.map((v, i) => days[i] + ' ' + money(v)).join(', '));
   }
 
+  function fillView() {
+    const s = S.settings, codes = [s.base, s.c2, s.c3];
+    if (!codes.includes(view)) view = s.base;
+    $('view').innerHTML = codes.map(c => `<option${c === view ? ' selected' : ''}>${c}</option>`).join('');
+  }
+  $('view').addEventListener('change', e => { view = e.target.value; render(); });
   $('form').addEventListener('input', () => {
     const f = read(''), e = checkFields(f);
     Object.keys(e).forEach(k => f[k] || delete e[k]);
