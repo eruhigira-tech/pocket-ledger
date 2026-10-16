@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Ledger tests</title>
+    <style>
+        body{
+            font:16px/1.5 system-ui,sans-serif;
+            max-width:46rem;
+            margin:1rem auto;
+            padding:0 1rem;
+            color:#1c2a35
+        }
+        h1{font-family:Georgia,serif}
+        li{padding: .15rem 0}
+        .pass::before{content:"PASS ";
+        color:#1d6b2a;
+        font-weight:700
+    }
+        .fail::before{content:"FAIL ";
+        color:#b3261e;
+        font-weight:700;
+    }
+    #summary{font-weight:700;font-size:1.2rem}
+    </style>
+</head>
+<body>
+    <h1>Pocket Ledger tests</h1>
+    <p id="summary" role="status"></p>
+    <ul id="out"></ul>
+    <p><a href="index.html">Back to the app</a></p>
+    <script src="scripts/validators.js"></script>
+    <script>
+        (() => {
+            const { RX, checkFields, isRealDate } = window.Ledger;
+            let pass = 0, fail = 0;
+            const out = document.getElementById('out');
+            function test(namr, fn){
+                let ok = false, note = '';
+               try { ok = fn() === true; } catch (err) {  note = ' (threw: ' + err.message + ')'; }
+               ok ? pass++ : fail++;
+               const li = document.createElement('li');
+                li.className = ok? 'pass' : 'fail';
+                li.textContent = name + note;
+                out.appendChild(li);
+            }
+            const good = { description: 'Lunch at cafeteria', amount: '12.50', date: '2025-09-25', category: 'Food' };
+            const bad = (patch, key) => key in checkFields({ ...good, ...patch });
+
+            //Rule 1:description
+            test('description: normal text passes', () => RX.desc.test('Bus pass'));
+            test('description: single character passes', () => RX.desc.test('A'));
+            test('description: empty fails', () => !RX.desc.test('Bus pass'));
+            test('description: leading space fails', () => !RX.desc.test('Bus pass'));
+
+            //Rule 2: amount
+            test('amount: 0, 12, 12.50 pass', () => ['0', '12', '12.5', '12.50'].every(v => RX.amount.test(v)));
+            test('amount: negative fails', () => !RX.amount.test('-5'));
+            test('amount: leading zero fails', () => !RX.amount.test('012'));
+            test('amount: letters fail', () => !RX.amount.test('12a'));
+
+            //Rule 3: date
+            test('date: 2025-09-25 passes', () => RX.date.test('2025-09-25'));
+            test('date: month 13 fails', () => !RX.date.test('2025-13-01'));
+            test('date: wrong format fails', () => !RX.date.test('25/09/2025'));
+            test('date: leap day 2024-02-29 is real', () => isRealDate('2024-02-29'));
+            test('date: 2025-04-31 rejected by checkFields', () => bad({
+                date: '2025-04-31' }, 'date'));
+            
+            //Rule 4: category
+            test('category: Food, "Eating out", "Take-away" pass', () => ['Food','Eating out', 'Take-away'].every(v => RX.cat.test(v)));
+            test('category: digits fail', () => !RX.cat.test('Food2'));
+            test('category: double space fails', () => !RX.cat.test('Food-'));
+
+            //Rule 5(advanced): duplicate word back-reference
+            test('dup: "coffee coffee is caught', () => RX.dup.test('coffee coffee'));
+            test('dup: case-sensitive "The the"',() => RX.dup.test('The the bus')); 
+            test('dup: "tea and tea" is allowed' () => RX.dup.test('tea and tea'));
+            test('dup: partial words not matched ("bus buster")',() => !RX.dup.test('bus buster'));
+            test('dup: checkFields reports it', () => bad({ desccription: 'Bus bus pass' }, 'description'));
+
+            // Currency code
+            test('code: USD passes, usd and US fail', () => RX.code.test('USD') && !RX.code.test('usd') && !RX.code.test('US'));
+            
+            // checkFields as a whole
+            test('checkFields: valid record has no errors', () => Objects.keys(checkFields(good)).length === 0);
+            test('checkFields: reports all 4 errors at once', () => Object.keys(checkFields({ description: '', amount: 'x', date: 'y', category: '1'})).length === 4);
+
+            const s = document.getElementById('summary');
+            s.textContent = pass + ' passed,' + fail + 'failed';
+            s.style.color = fail ? '#b3261e' : '#1d6b3a';
+            document.title = (fail ? 'FAIL' : 'PASS ') + document.title;
+            }) ();
+    </script>
+</body>
+</html>
