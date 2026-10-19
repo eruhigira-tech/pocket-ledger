@@ -12,6 +12,7 @@
 <body>
     <a class="skip" href="#main">Skip to content</a>
  <header>
+    
     <h1>Pocket Ledger</h1>
     <nav aria-label="Sections"><a href="#dash">Dashboard</a><a href="#add">Add</a><a href="#set">Settings</a><a href="#recs">Records</a><a href="#about">About</a></nav>
  </header>
@@ -36,6 +37,7 @@
         <form id="form" novalidate>
             <label for="desc">Description</label>
             <input id="desc" autocomplete="off" aria-describedby="e-desc">
+<<<<<<< HEAD
             <p class="err" id="e-desc"></p>
             <div class="row">
                 <div><label for="amt">Amount (base currency)</label><input id="amt" inputmode="decimal" aria-describedby="e-amt"><p class="err" id="e-amt"></p></div>
@@ -108,5 +110,69 @@
  <script src="scripts/validators.js"></script>
  <script src="scripts/search.js"></script>
  <script src="scripts/app.js"></script>
+=======
+        <p class="err" id="e-desc"></p>
+            <div class = "row"></div>
+            <div><label for="amt">Amount (base currency)</label><input id="amt" inputmode="decimal" aria-describedby="e-amt"></p></div>
+            <div><label for="date">Date(YYYY-MM-DD)</label><input id="date" aria-describedby="e-date"><p class="err" id="e-cat"></p>
+                    <button>Add expense</button>
+            </form>
+            </section>
+            <section id="set" aria-labelledby="h-set">
+                <h2 id="set">Settings</h2>
+                <form id="setForm" novalidate>
+                    <div class="row">
+                        <div><label for="base">Base Currency</label><input id="base" maxlength="3"></div>
+                        </div>
+                        <div><label for="cap">Monthly Cap (base)</label><input id="decimal"></div>
+                        <div class="row">
+                            <div><label for="c2">Second currency</label><input id= "c2" maxlength="3"></div>
+                            <div><label for="r2">1 base equals</label><input id="r2" inputmode="decimal"></div>
+                        </div>
+                        
+                        <div class = "row">
+                            <div><label for="c3">Third currency</label><input id="c3" maxlength="3"></div>
+                            <div><label for="r3">1 base equals</label><input id="r3" inputmode="decimal"></div>
+                        </div>
+                        <label for="cats">Categories, separated by commas</label><input id="cats">
+                        <p class="err" id="e-set" role="alert"></p>
+                        <buttom>Save settings</buttom>
+                        </form>
+                        <p><buttom id="export"  class="alt">Export JSON</buttom></p>
+                        <label for="import">Import JSON</label><input id="import" type="file" accept=".json,application/json">
+                    </section>
+                    <section id="recs" class="wide" aria-labelledby="h-recs">
+                        <h2 id="h-recs">Records</h2>
+                        <div class="row">
+                            <div><label for="q">Search with a regex</label><input id ="q" placeholder="try (coffee|tea) or \.\d{2}\b" autocomplete="off" aria-describedby="e-q"></div>
+                            <div><label for="sort">Sort by</label>
+                                <select id="sort">
+                                    <option value="date-d">Date, newest first</option>
+                                    <option value="date-a">Date, oldest first</option>
+                                    <option value="amt-d">Amount, high to low</option>
+                                </select>
+                            </div>
+                            <label><input type="checkbox" id="ci" checked>Ignore case</label>
+                            <p class="err" id="e-q"></p>
+                            <div class="tablewrap">
+                                <table>
+                                    <caption class="sr">Expenses</caption>
+                                    <thead><tr><th scope="col">Date</th><th scope="col">Description</th><th scope="col">Category</th><th scope="col">Amount</th><th scope="col">Actions</th></tr>></thead>
+                                </table>
+                            </div>
+                            <p id="empty"></p>
+                        </section>
+                        <section id="about" class="wide" aria-labelledby="h-about">
+                            <h2 id="h-about">About</h2>
+                            <p>Pocket Ledger helps a student see where the money goes. Add expenses, search them with regex, and keep an eye on a monthly cap. Everything is saved in this browser.</p>
+                            <p>Built by RUHIGIRA IRIZA GIANNE ELYSE. <a href="https://github.com/eruhigira-tech">Github</a> or <a href="mailto:e.ruhigira@alustudent.com">Email</a>.</p>
+
+                    </section>
+                </main>    
+        <footer><p>Data never leaves your browser.</p></footer>
+                <script src="scripts/validators.js"></script>
+                <script src="scripts/search.js"></script>
+                <script src="scripts/app.js"></script>
+>>>>>>> d7daf14 (Updates)
 </body>
 </html>
