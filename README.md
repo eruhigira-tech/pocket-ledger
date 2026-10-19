@@ -2,8 +2,8 @@
 
 A small, accessible expense tracker for students. Add expenses, search them with regular expressions, watch a monthly cap, and keep everything in your own browser.
 
-**Demo video:** add your link here
-**Live site:** add your GitHub Pages link here
+**Demo video:** (https://youtu.be/v7jh1LGh2LM)
+**Live site:** (https://eruhigira-tech.github.io/pocket-ledger/)
 
 ## Features
 - Add, edit and delete expenses with live regex validation
